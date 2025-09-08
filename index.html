@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even Odd Num</title>
+</head>
+<body>
+    <h1> Even Odd Num Checker</h1>
+    <input type="number" id="numInput" placeholder="Enter Your num">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function numCheck(){
+
+            let num = document.getElementById('numInput').value;
+
+            let resultText = '';
+
+            if(num % 2 === 0){
+
+                resultText = num + ' is Even ';
+
+            }else{
+
+                resultText = num + ' is odd ';
+            }
+
+            result.textContent = resultText;
+        }
+
+        checkBtn.addEventListener('click', numCheck);
+    </script>
+</body>
+</html>
