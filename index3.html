@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Checker</title>
+
+</head>
+<body>
+    <h1>Password checker</h1>
+    <input type="password" id="passInput" placeholder="Enter Your Password">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+    <script>
+
+const checkBtn = document.getElementById('checkBtn');
+const result = document.getElementById('result');
+const  passInput = document.getElementById('passInput');
+function passwordCheck(){
+    let password = passInput.value;
+    let resultText = '';
+    if(password.length >= 6){
+        resultText = 'successful';
+    }else{
+        resultText = 'weak';
+    }
+    result.textContent = resultText;
+}
+checkBtn.addEventListener('click' , passwordCheck);
+    </script>
+</body>
+</html>

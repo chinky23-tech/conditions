@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark mode switcher</title>
+    <style>
+            body.day {
+      background: #fdf6e3;
+      color: #333;
+      transition: 0.5s;
+    }
+
+    body.night {
+      background: #2c3e50;
+      color: #ecf0f1;
+      transition: 0.5s;
+    }
+    </style>
+</head>
+<button id="darkMode">Dark</button>
+<body class="day">
+    <h1 id="title">Day mode</h1>
+    <button id="themeBtn">Swicth Theme</button>
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+        const title = document.getElementById('title');
+
+        function swicthTheme(){
+            if(body.classList.contains('day')){
+                body.classList.remove('day');
+                body.classList.add('night');
+                title.textContent = 'night mode';
+            }else{
+                body.classList.remove('night');
+                body.classList.add('day');
+                title.textContent = 'day mode';
+            }
+        }
+        themeBtn.addEventListener('click' , swicthTheme);
+    </script>
+</body>
+</html>

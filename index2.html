@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Checker</title>
+</head>
+<body>
+    <h1>Age Checker</h1>
+    <input type="number" id="ageInput" placeholder="Enter Your Age">
+    <button id="ageBtn">Check</button>
+    <p id="result"></p>
+    <script>
+     const result =   document.getElementById('result');
+     const ageBtn = document.getElementById('ageBtn');
+     
+        function ageChecker(){
+
+            let num = document.getElementById('ageInput').value;
+
+            let resultText = '';
+
+            if(num >= 18){
+                resultText =  'You are Adult';
+            }else{
+                
+                resultText =  'You are Minor';
+            }
+            result.textContent = resultText;
+        }
+        ageBtn.addEventListener('click' , ageChecker);
+    </script>
+</body>
+</html>
