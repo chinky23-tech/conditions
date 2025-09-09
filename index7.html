@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="username" placeholder="enter username"><br><br>
+    <input type="password" id="password" placeholder="enter password"><br><br>
+    <button id="loginBtn">Login</button>
+    <p id="result"></p>
+    <script>
+   const loginBtn = document.getElementById('loginBtn');
+   const result = document.getElementById('result');
+   const username = document.getElementById('username');
+   const password = document.getElementById('password');
+
+   function loginCheck(){
+    let user = username.value;
+    let pass = password.value;
+
+    let resultText = '';
+
+    let correctUser = 'admin';
+    let correctPass = '12345';
+
+    if(user === correctUser && pass === correctPass){
+        resultText = 'login successful';
+    }else {
+        resultText = 'invalid';
+    }
+    result.textContent = resultText;
+   }
+loginBtn.addEventListener('click' , loginCheck);
+
+    </script>
+</body>
+</html>

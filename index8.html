@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Checker</title>
+</head>
+<body>
+    <input type ="number" id="tempInput" placeholder="Enter Temperature">
+    <button id="tempCheck">Check</button>
+    <p id="demo"></p>
+    <script>
+        const tempInput = document.getElementById('tempInput');
+        const tempCheck = document.getElementById('tempCheck');
+        const demo = document.getElementById('demo');
+
+
+        function TemperatureCheck(){
+
+            let temp = Number(tempInput.value);
+
+            let resultText = '';
+
+            if(isNaN(temp)){
+                resultText = 'Please enter a valid number';
+            }else if(temp <= 0){
+                resultText = 'It`s freezing cold!';
+            }else if(temp > 0 && temp < 15){
+                resultText = 'its cold';
+            }else if(temp >= 15 && temp <= 30){
+                resultText = 'its warm';
+            }else{
+                resultText = 'its hot';
+            }
+            demo.textContent = resultText;
+        }
+
+        tempCheck.addEventListener('click', TemperatureCheck);
+    </script>
+</body>
+</html>

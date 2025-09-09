@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type = "number" id="numCheck" placeholder="check eligibility">
+    <button id="checkBtn">Check</button>
+    <p id="demo"></p>
+<script>
+    const numCheck = document.getElementById('numCheck');
+    const checkBtn = document.getElementById('checkBtn');
+    const demo = document.getElementById('demo');
+    function checkElegibility(){
+
+        let age = numCheck.value;
+
+        let resultText = '';
+        if(age >= 18){
+            resultText = 'you are Elegible';
+        }else{
+            resultText = 'you are not elegible';
+        }
+        demo.textContent = resultText;
+    }
+    checkBtn.addEventListener('click' , checkElegibility);
+</script>
+</body>
+</html>

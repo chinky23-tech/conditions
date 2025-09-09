@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="passInput" placeholder="enter your score">
+    <button id="scoreCheck">Check</button>
+    <p id="demo"></p>
+    <script>
+        const passInput = document.getElementById('passInput');
+        const scoreCheck = document.getElementById('scoreCheck');
+        const demo = document.getElementById('demo');
+
+        function checkNumber(){
+            let score = passInput.value;
+            let resultText = '';
+            if(score >= 40){
+                resultText = 'congratulations Pass';
+            }else{
+                resultText = 'sorry Fail';
+            }
+            demo.textContent = resultText;
+        }
+        scoreCheck.addEventListener('click', checkNumber);
+    </script>
+</body>
+</html>
