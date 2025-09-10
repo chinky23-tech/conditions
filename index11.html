@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age & Membership Checker</title>
+</head>
+<body>
+  <h1>Club Entry Checker</h1>
+
+  <input type="number" id="ageInput" placeholder="Enter Your Age">
+  <input type="text" id="memberInput" placeholder="Membership? yes/no">
+
+  <button id="checkBtn">Check</button>
+  <p id="result"></p>
+
+  <script>
+    const ageInput = document.getElementById('ageInput');
+    const memberInput = document.getElementById('memberInput');
+    const result = document.getElementById('result');
+    const checkBtn = document.getElementById('checkBtn');
+
+    function checkAge() {
+      let age = Number(ageInput.value);
+      let member = memberInput.value.toLowerCase();
+      let resultText = '';
+
+      if (age >= 18 && member === 'yes') {
+        resultText = '✅ Entry Allowed';
+      } else if (age < 18 && member === 'yes') {
+        resultText = '❌ Too young, even with membership';
+      } else if (age >= 18 && member !== 'yes') {
+        resultText = '❌ No membership card, entry denied';
+      } else {
+        resultText = '❌ Sorry, no entry';
+      }
+
+      result.textContent = resultText;
+    }
+
+    checkBtn.addEventListener('click', checkAge);
+  </script>
+</body>
+</html>

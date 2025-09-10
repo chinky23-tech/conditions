@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number guessing game</title>
+</head>
+<body>
+    <input type="number" id="numInput" placeholder="Enter a number">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        const numInput = document.getElementById('numInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const result = document.getElementById('result');
+          const secretNumber = 20;
+        function checkGuess(){
+            
+            let userGuess = Number(numInput.value);
+              
+            let resultText = '';
+
+            if(userGuess == secretNumber){
+                resultText = 'correct';
+            }else if(userGuess > secretNumber){
+                resultText = 'too high';
+            }else if( userGuess < secretNumber){
+                resultText = 'too low';
+            }
+                
+            
+            result.textContent = resultText;
+        }
+        checkBtn.addEventListener('click', checkGuess);
+    </script>
+</body>
+</html>

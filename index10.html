@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="lightColor" placeholder="Enter color (red, yellow, green)">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+    <script>
+        const lightColor =  document.getElementById('lightColor');
+        const checkBtn = document.getElementById('checkBtn');
+        const result = document.getElementById('result');
+           
+        function  checkLight(){
+
+            let color = lightColor.value.toLowerCase().trim();
+
+            let action = '';
+
+            if(color === 'red'){
+                action = 'stop! the light is red';
+            }else if(color === 'yellow'){
+                action = 'get ready! the light is yellow';
+            }else if( color === 'green'){
+                action = 'go! the light is green';
+            }else{
+                action = 'invalid color. please enter red, yellow, or green .';
+
+            }
+            result.textContent = action;
+        }
+checkBtn.addEventListener('click', checkLight);
+
+    </script>
+</body>
+</html>

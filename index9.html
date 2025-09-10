@@ -20,19 +20,19 @@
 
             let resultText = '';
 
-            if(isNaN(amount)){
+            if(isNaN(amount) || amount <=0 ){
                 resultText = 'Please enter a valid number';
             }else if(amount < 100){
                 resultText = 'no discount';
-            }else if( amount >= 100 && 499){
+            }else if( amount >= 100 && amount <= 499){
                 resultText = '10% discount';
-            }else if(amount >= 500 && 999){
+            }else if(amount >= 500 &&  amount <= 999){
                 resultText = '20% discount';
 
             }else if(amount >= 1000){
                 resultText = '30% discount';
             }else{
-                30% applied;
+                resultText= '30% applied';
             }
             result.textContent = resultText;
         }
