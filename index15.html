@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount calculator</title>
+</head>
+<body>
+    <input type="number" id="numInput" placeholder="enter amount">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+    <script>
+const numInput = document.getElementById('numInput');
+
+const checkBtn = document.getElementById('checkBtn');
+
+const result = document.getElementById('result');
+
+function saleDiscount(){
+
+    let amount = Number(numInput.value);
+     
+    let resultText = '';
+
+
+if(isNaN(amount) || amount <= 0){
+
+    resultText= 'Please enter valid amount';
+
+} else if(amount >= 100 && amount <= 150){
+
+        resultText = 'discount 10%';
+
+    }else if(amount >= 200 && amount <= 499){
+
+        resultText = 'discount 20%';
+
+
+    }else if (amount >= 500 && amount <= 999){
+        resultText = 'discount 30%';
+    }else{
+        resultText = 'no discount';
+    }
+    result.textContent = resultText;
+
+}
+checkBtn.addEventListener('click' , saleDiscount);
+
+    </script>
+</body>
+</html>

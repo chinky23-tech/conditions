@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Clothing Suggestion</title>
+</head>
+<body>
+    <input type="number" id="numInput" placeholder="Enter temperature (°C)">
+    <input type="text" id="weatherInput" placeholder="Enter weather (raining/sunny)">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+
+    <script>
+        const numInput = document.getElementById('numInput');
+        const weatherInput = document.getElementById('weatherInput');
+        const checkBtn = document.getElementById('checkBtn');
+        const result = document.getElementById('result');
+
+        function tempCheck(){
+            let temp = Number(numInput.value);
+            let weather = weatherInput.value.toLowerCase().trim();
+            let resultText = '';
+
+            if (isNaN(temp)) {
+                resultText = 'Please enter a valid number';
+            } else if (temp < 20 && weather === 'raining') {
+                resultText = 'Wear a jacket + umbrella ☔';
+            } else if (temp < 20 && weather !== 'raining') {
+                resultText = 'Wear a warm jacket 🧥';
+            } else if (temp > 30 && weather !== 'raining') {
+                resultText = 'Wear light clothes 👕';
+            } else if (temp > 30 && weather === 'raining') {
+                resultText = 'Wear light clothes + carry umbrella ☔';
+            } else {
+                resultText = 'Normal clothes are fine 👌';
+            }
+
+            result.textContent = resultText;
+        }
+
+        checkBtn.addEventListener('click', tempCheck);
+    </script>
+</body>
+</html>

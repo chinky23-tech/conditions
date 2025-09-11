@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+</head>
+<body>
+    <input type="number" id="scoreInput" placeholder="Enter your score">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+    <script>
+
+        const scoreInput = document.getElementById('scoreInput');
+
+        const checkBtn = document.getElementById('checkBtn');
+
+        const result = document.getElementById('result');
+
+        function showgrade(){
+
+            let score = Number(scoreInput.value);
+
+            let resultText = '';
+
+            if(score >= 90){
+                resultText = 'A Grade';
+            }else if(score >= 75){
+                resultText = 'B Grade';
+            }else if(score >= 50){
+                resultText = 'C Grade';
+            }else{
+                resultText = 'Fail';
+            }
+            result.textContent = resultText;
+        }
+        checkBtn.addEventListener('click' , showgrade);
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login validator</title>
+</head>
+<body>
+    <input type="text" id="userName" placeholder="Enter User Name">
+    <input type="password"  id="passwordInput" placeholder="Enter password">
+    <button id="logIn">Login</button>
+    <p id="result"></p>
+    <script>
+    
+    const userName = document.getElementById('userName');
+
+    const passwordInput = document.getElementById('passwordInput');
+
+    const logIn = document.getElementById('logIn');
+
+    const result = document.getElementById('result');
+
+    function validLogin(){
+         
+      
+         
+        let password = Number(passwordInput.value);
+          
+        let  user = userName.value.toLowerCase().trim();
+
+        let resultText = '';
+
+        let correctUser = 'admin';
+
+        let correctPass = '1234';
+
+        if ( correctUser == user && correctPass == password){
+            resultText = 'login successful';
+        }else if( correctUser != user && correctPass !== password){
+            resultText = 'login fail';
+        }
+
+        result.textContent = resultText;
+
+       
+
+    }
+    logIn.addEventListener('click' , validLogin);
+
+    </script>
+</body>
+</html>

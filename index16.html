@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Simulation</title>
+</head>
+<body>
+    <input type="text" id="lightColor" placeholder="Enter color">
+    <button id="checkBtn">Check</button>
+    <p id="result"></p>
+
+    <script>
+
+     const lightColor = document.getElementById('lightColor');
+     const checkBtn = document.getElementById('checkBtn');
+     const  result = document.getElementById('result');
+
+     function lightSimulation(){
+
+
+        let color = lightColor.value.toLowerCase().trim();
+
+        let resultText = '';
+
+        if(color === 'red'){
+            resultText = 'stop';
+        }else if( color === 'yellow'){
+            resultText = 'slowdown';
+        }else if( color === 'green'){
+            resultText = ' go';
+        }
+        result.textContent = resultText;
+     }
+          checkBtn.addEventListener('click' , lightSimulation);
+    </script>
+</body>
+</html>
