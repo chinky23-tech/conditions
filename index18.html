@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+<link rel="stylesheet" href="./output.css">
+</head>
+
+
+<body class="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+    
+    <!-- BMI Categories Card -->
+    <div class="bg-white shadow-lg rounded-xl p-6">
+      <h2 class="text-xl font-bold mb-4">BMI Categories</h2>
+      <ul id="bmiList" class="space-y-2">
+        <li id="underweight" class="p-3 rounded-md">Underweight: &lt; 18.5</li>
+        <li id="normal" class="p-3 rounded-md">Normal: 18.5 - 24.9</li>
+        <li id="overweight" class="p-3 rounded-md">Overweight: 25 - 29.9</li>
+        <li id="obese" class="p-3 rounded-md">Obese: 30+</li>
+      </ul>
+    </div>
+
+    <!-- Input Card -->
+    <div class="bg-white shadow-lg rounded-xl p-6">
+      <h2 class="text-xl font-bold mb-4">Calculate Your BMI</h2>
+
+      <!-- Toggle Units 
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-sm">Units:</span>
+        <button id="toggleUnit" class="px-3 py-1 bg-blue-500
+         text-white rounded-md text-sm">
+          Metric (kg/cm)
+        </button>
+      </div>-->
+
+<!--toggle units-->
+
+
+<label class="inline-flex items-center cursor-pointer">
+  <input type="checkbox" value="" class="sr-only peer">
+  <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+  <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Stardard</span>
+  <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Metric</span>
+</label>
+
+
+
+      <!-- Inputs -->
+      <input type="number" id="weightInput" placeholder="Enter weight" 
+      class="w-full border p-2 rounded-md mb-3">
+      <input type="number" id="heightInput" placeholder="Enter height" 
+      class="w-full border p-2 rounded-md mb-3">
+
+      <!-- Button -->
+      <button id="checkBtn" class="w-full bg-green-500 hover:bg-green-600
+       text-white font-semibold py-2 rounded-md">
+        Calculate
+      </button>
+
+      <!-- Result -->
+      <p id="result" class="mt-4 text-lg font-medium"></p>
+    </div>
+  </div>
+
+
+
+
+  <script>
+
+
+
+    const weightInput = document.getElementById('weightInput');
+    const heightInput = document.getElementById('heightInput');
+    const checkBtn = document.getElementById('checkBtn');
+    const result = document.getElementById('result');
+    const toggleUnitBtn = document.getElementById('toggleUnit');
+    const bmiList = {
+      underweight: document.getElementById('underweight'),
+      normal: document.getElementById('normal'),
+      overweight: document.getElementById('overweight'),
+      obese: document.getElementById('obese')
+    };
+
+
+
+    let isMetric = true; // toggle state
+
+    // Toggle Units
+    toggleUnitBtn.addEventListener('click', () => {
+      isMetric = !isMetric;
+      toggleUnitBtn.textContent = isMetric ? "Metric (kg/cm)" : "Imperial (lbs/inch)";
+    });
+
+    // Calculate BMI
+    checkBtn.addEventListener('click', () => {
+      let weight = Number(weightInput.value);
+      let height = Number(heightInput.value);
+
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        result.textContent = "❌ Please enter valid numbers";
+        return;
+      }
+
+
+      // Convert if imperial
+      if (!isMetric) {
+        weight = weight * 0.453592; // lbs → kg
+        height = height * 0.0254;   // inch → m
+      } else {
+        height = height / 100; // cm → m
+      }
+
+      let bmi = weight / (height * height);
+      result.textContent = `Your BMI: ${bmi.toFixed(1)}`;
+
+      // Reset highlights
+      Object.values(bmiList).forEach(el => el.classList.remove("bg-green-200",
+      "bg-yellow-200","bg-red-300","bg-blue-200"));
+
+      // Highlight correct row
+      if (bmi < 18.5) {
+        bmiList.underweight.classList.add("bg-blue-200");
+      } else if (bmi >= 18.5 && bmi <= 24.9) {
+        bmiList.normal.classList.add("bg-green-200");
+      } else if (bmi >= 25 && bmi <= 29.9) {
+        bmiList.overweight.classList.add("bg-yellow-200");
+      } else {
+        bmiList.obese.classList.add("bg-red-300");
+      }
+    });
+
+
+
+  </script>
+
+</body>
+</html>

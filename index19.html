@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .slidecontainer {
+            width: 100%;
+        }
+        
+        .slider {
+           /* -webkit-appearance: none;*/
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+        }
+        
+        .bmi-scale {
+            background: linear-gradient(90deg, #3b82f6, #10b981, #f59e0b, #ef4444);
+        }
+        
+        .scale-marker {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-2xl">
+        <div class="md:flex">
+            <!-- Input Section -->
+            <div class="md:w-1/2 p-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">BMI Calculator</h1>
+                <p class="text-gray-600 mb-6">Check your body mass index</p>
+                
+                <div class="space-y-6">
+                    <!-- Gender Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
+                        <div class="flex space-x-4">
+                            <button id="maleBtn" class="flex-1 py-2 px-4 rounded-lg border border-gray-300 text-center transition-all duration-300 bg-indigo-100 border-indigo-500">
+                                <i class="fas fa-mars text-indigo-600"></i>
+                                <span class="ml-2 font-medium">Male</span>
+                            </button>
+                            <button id="femaleBtn" class="flex-1 py-2 px-4 rounded-lg border border-gray-300 text-center transition-all duration-300">
+                                <i class="fas fa-venus text-pink-500"></i>
+                                <span class="ml-2 font-medium">Female</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Age Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                        <div class="flex items-center">
+                            <span class="text-gray-500 mr-2">Years</span>
+                            <input type="number" id="age" class="flex-1 border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" value="25" min="1" max="120">
+                        </div>
+                    </div>
+                    
+                    <!-- Height Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Height</label>
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-500 mr-2">cm</span>
+                            <input type="number" id="height" class="flex-1 border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" value="170" min="50" max="250">
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" min="50" max="250" value="170" class="slider" id="heightSlider">
+                        </div>
+                    </div>
+                    
+                    <!-- Weight Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Weight</label>
+                        <div class="flex items-center mb-2">
+                            <span class="text-gray-500 mr-2">kg</span>
+                            <input type="number" id="weight" class="flex-1 border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" value="70" min="10" max="200">
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" min="10" max="200" value="70" class="slider" id="weightSlider">
+                        </div>
+                    </div>
+                    
+                    <!-- Calculate Button -->
+                    <button id="calculateBtn" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center">
+                        <i class="fas fa-calculator mr-2"></i> Calculate BMI
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Result Section -->
+            <div class="md:w-1/2 bg-gradient-to-b from-indigo-600 to-indigo-800 p-8 text-white flex flex-col justify-center">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold mb-2">Your Result</h2>
+                    <p id="bmiValue" class="text-5xl font-bold my-6">00.0</p>
+                    <p id="bmiCategory" class="text-xl font-semibold">-</p>
+                    <p id="bmiDescription" class="text-indigo-200 mt-2">Enter your details to calculate your BMI</p>
+                </div>
+                
+                <!-- BMI Scale -->
+                <div class="mt-8">
+                    <div class="bmi-scale h-3 rounded-full mb-2"></div>
+                    <div class="flex justify-between text-xs text-indigo-200">
+                        <span>Underweight</span>
+                        <span>Normal</span>
+                        <span>Overweight</span>
+                        <span>Obese</span>
+                    </div>
+                    <div class="scale-marker h-6 w-1 bg-white rounded-full mt-1 relative -translate-x-1/2" style="left: 0%;"></div>
+                </div>
+                
+                <!-- Health Tips -->
+                <div id="healthTips" class="mt-8 text-sm text-indigo-200 hidden">
+                    <p class="font-semibold mb-2">Health Tips:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Maintain a balanced diet with plenty of fruits and vegetables</li>
+                        <li>Engage in regular physical activity</li>
+                        <li>Stay hydrated by drinking enough water</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const maleBtn = document.getElementById('maleBtn');
+            const femaleBtn = document.getElementById('femaleBtn');
+            const ageInput = document.getElementById('age');
+            const heightInput = document.getElementById('height');
+            const weightInput = document.getElementById('weight');
+            const heightSlider = document.getElementById('heightSlider');
+            const weightSlider = document.getElementById('weightSlider');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const bmiValue = document.getElementById('bmiValue');
+            const bmiCategory = document.getElementById('bmiCategory');
+            const bmiDescription = document.getElementById('bmiDescription');
+            const healthTips = document.getElementById('healthTips');
+            const scaleMarker = document.querySelector('.scale-marker');
+            
+            // Set active gender
+            let activeGender = 'male';
+            
+            // Gender selection
+            maleBtn.addEventListener('click', function() {
+                activeGender = 'male';
+                maleBtn.classList.add('bg-indigo-100', 'border-indigo-500');
+                femaleBtn.classList.remove('bg-indigo-100', 'border-indigo-500');
+            });
+            
+            femaleBtn.addEventListener('click', function() {
+                activeGender = 'female';
+                femaleBtn.classList.add('bg-indigo-100', 'border-indigo-500');
+                maleBtn.classList.remove('bg-indigo-100', 'border-indigo-500');
+            });
+            
+            // Sync sliders with inputs
+            heightSlider.addEventListener('input', function() {
+                heightInput.value = heightSlider.value;
+            });
+            
+            weightSlider.addEventListener('input', function() {
+                weightInput.value = weightSlider.value;
+            });
+            
+            heightInput.addEventListener('input', function() {
+                heightSlider.value = heightInput.value;
+            });
+            
+            weightInput.addEventListener('input', function() {
+                weightSlider.value = weightInput.value;
+            });
+            
+            // Calculate BMI
+            calculateBtn.addEventListener('click', function() {
+                const age = parseInt(ageInput.value);
+                const height = parseInt(heightInput.value) / 100; // convert to meters
+                const weight = parseInt(weightInput.value);
+                
+                // Validate inputs
+                if (isNaN(age) || isNaN(height) || isNaN(weight) || age <= 0 || height <= 0 || weight <= 0) {
+                    bmiValue.textContent = '00.0';
+                    bmiCategory.textContent = 'Invalid input';
+                    bmiDescription.textContent = 'Please enter valid values for all fields';
+                    healthTips.classList.add('hidden');
+                    return;
+                }
+                
+                // Calculate BMI
+                const bmi = weight / (height * height);
+                const roundedBmi = bmi.toFixed(1);
+                
+                // Display BMI value
+                bmiValue.textContent = roundedBmi;
+                
+                // Determine BMI category using if-else and logical operators
+                let category = '';
+                let description = '';
+                
+                if (bmi < 18.5) {
+                    category = 'Underweight';
+                    description = 'You may need to gain weight for better health';
+                } else if (bmi >= 18.5 && bmi < 25) {
+                    category = 'Normal weight';
+                    description = 'You have a healthy body weight';
+                } else if (bmi >= 25 && bmi < 30) {
+                    category = 'Overweight';
+                    description = 'Consider losing some weight for better health';
+                } else {
+                    category = 'Obesity';
+                    description = 'It is recommended to lose weight for better health';
+                }
+                
+                // Adjust for age and gender
+                if (activeGender === 'male' && age > 35 && bmi >= 25 && bmi < 27) {
+                    description = 'For men over 35, a slightly higher BMI may be acceptable';
+                } else if (activeGender === 'female' && age > 35 && bmi >= 24 && bmi < 26) {
+                    description = 'For women over 35, a slightly higher BMI may be acceptable';
+                }
+                
+                // Display category and description
+                bmiCategory.textContent = category;
+                bmiDescription.textContent = description;
+                
+                // Update scale marker position
+                let markerPosition = 0;
+                if (bmi < 18.5) {
+                    markerPosition = (bmi / 18.5) * 25;
+                } else if (bmi < 25) {
+                    markerPosition = 25 + ((bmi - 18.5) / 6.5) * 25;
+                } else if (bmi < 30) {
+                    markerPosition = 50 + ((bmi - 25) / 5) * 25;
+                } else {
+                    markerPosition = 75 + (Math.min(10, bmi - 30) / 10) * 25;
+                }
+                
+                scaleMarker.style.left = `${Math.min(100, markerPosition)}%`;
+                
+                // Show health tips
+                healthTips.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
